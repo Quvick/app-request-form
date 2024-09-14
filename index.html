@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New App Request</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Подключение шрифта Inter из Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>New App Request</h1>
+        <form action="https://formspree.io/f/xjkbdewl" method="POST">
+            <!-- Блок #1: Base Information -->
+            <section>
+                <h2>Base Information</h2>
+
+                <label>
+                    <span>App Name</span>
+                    <p>Shouldn’t contain special characters (emoji, symbols, etc)</p>
+                    <input type="text" name="App Name" required>
+                </label>
+
+                <label>
+                    <span>App Icon</span>
+                    <p>Please insert here a link (Google Drive, Dropbox, etc) where we can download the logo of your establishment. Minimal Size: 1024x1024 px. Vector file format is preferred: SVG, EPS or AI</p>
+                    <input type="url" name="App Icon" required>
+                </label>
+
+                <label>
+                    <span>Main color of your application</span>
+                    <p>If you want to keep the current color from the template settings, leave this field blank.</p>
+                    <input type="text" name="Main Color">
+                </label>
+            </section>
+
+            <!-- Блок #2: App Configuration -->
+            <section>
+                <h2>App Configuration</h2>
+                <p>Please select the functions that will be included in the application</p>
+
+                <!-- Строка 4: Filters on restaurant list -->
+                <fieldset>
+                    <legend>Filters on restaurant list</legend>
+                    <p>Recommended only for large chains with restaurants of various types and functionality.</p>
+                    <label><input type="checkbox" name="Filters[]" value="Cuisines"> Cuisines</label>
+                    <label><input type="checkbox" name="Filters[]" value="Delivery"> Delivery</label>
+                    <label><input type="checkbox" name="Filters[]" value="Booking"> Booking</label>
+                    <label><input type="checkbox" name="Filters[]" value="Takeaway"> Takeaway</label>
+                    <label><input type="checkbox" name="Filters[]" value="Table Order"> Table Order</label>
+                    <label><input type="checkbox" name="Filters[]" value="Open Now"> Open Now</label>
+                    <label><input type="checkbox" name="Filters[]" value="Sort"> Sort</label>
+                </fieldset>
+
+                <!-- Строка 5: Authorization & User Profiles -->
+                <fieldset>
+                    <legend>Authorization & User Profiles</legend>
+                    <p>Notification Center is a feature that allows you to send custom messages with push notifications to your customers.</p>
+                    <label><input type="radio" name="Authorization & User Profiles" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="Authorization & User Profiles" value="Disabled"> Disabled</label>
+                </fieldset>
+
+                <!-- Повторите для строк 6-10 аналогично -->
+                <!-- Пример для строки 6: Favorite restaurants -->
+                <fieldset>
+                    <legend>Favorite restaurants</legend>
+                    <p>Makes it possible to add establishments to your favorites list. Recommended for large chains.</p>
+                    <label><input type="radio" name="Favorite restaurants" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="Favorite restaurants" value="Disabled"> Disabled</label>
+                </fieldset>
+
+                <!-- Повторите для остальных строк 7-10 -->
+
+                <!-- Строка 11: Default Screen on startup -->
+                <fieldset>
+                    <legend>Default Screen on startup</legend>
+                    <p>Makes reviews of the establishment visible to users.</p>
+                    <label><input type="radio" name="Default Screen on startup" value="Authorization" checked> Authorization</label>
+                    <label><input type="radio" name="Default Screen on startup" value="Restaurant list"> Restaurant list</label>
+                </fieldset>
+            </section>
+
+            <!-- Блок #3: Additional -->
+            <section>
+                <h2>Additional</h2>
+                <label>
+                    <span>Chain URL</span>
+                    <input type="url" name="Chain URL" placeholder="https://backoffice.choiceqr.com/clients/...">
+                </label>
+            </section>
+
+            <button type="submit">Send request</button>
+        </form>
+    </div>
+
+    <!-- Подключение скрипта, если потребуется -->
+    <script src="script.js"></script>
+</body>
+</html>
