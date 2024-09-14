@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New App Request</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <!-- Подключение шрифта Inter из Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -31,7 +32,7 @@
                 <label>
                     <span>Main color of your application</span>
                     <p>If you want to keep the current color from the template settings, leave this field blank.</p>
-                    <input type="text" name="Main Color">
+                    <input type="text" name="Main Color" placeholder="#FFFFFF">
                 </label>
             </section>
 
@@ -44,21 +45,21 @@
                 <fieldset>
                     <legend>Filters on restaurant list</legend>
                     <p>Recommended only for large chains with restaurants of various types and functionality.</p>
-                    <label><input type="checkbox" name="Filters[]" value="Cuisines"> Cuisines</label>
-                    <label><input type="checkbox" name="Filters[]" value="Delivery"> Delivery</label>
-                    <label><input type="checkbox" name="Filters[]" value="Booking"> Booking</label>
-                    <label><input type="checkbox" name="Filters[]" value="Takeaway"> Takeaway</label>
-                    <label><input type="checkbox" name="Filters[]" value="Table Order"> Table Order</label>
-                    <label><input type="checkbox" name="Filters[]" value="Open Now"> Open Now</label>
-                    <label><input type="checkbox" name="Filters[]" value="Sort"> Sort</label>
+                    <label><input type="checkbox" name="Filters" value="Cuisines"> Cuisines</label>
+                    <label><input type="checkbox" name="Filters" value="Delivery"> Delivery</label>
+                    <label><input type="checkbox" name="Filters" value="Booking"> Booking</label>
+                    <label><input type="checkbox" name="Filters" value="Takeaway"> Takeaway</label>
+                    <label><input type="checkbox" name="Filters" value="Table Order"> Table Order</label>
+                    <label><input type="checkbox" name="Filters" value="Open Now"> Open Now</label>
+                    <label><input type="checkbox" name="Filters" value="Sort"> Sort</label>
                 </fieldset>
 
                 <!-- Строка 5: Authorization & User Profiles -->
                 <fieldset>
                     <legend>Authorization & User Profiles</legend>
                     <p>Notification Center is a feature that allows you to send custom messages with push notifications to your customers.</p>
-                    <label><input type="radio" name="Authorization & User Profiles" value="Enabled" checked> Enabled</label>
-                    <label><input type="radio" name="Authorization & User Profiles" value="Disabled"> Disabled</label>
+                    <label><input type="radio" name="Auth" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="Auth" value="Disabled"> Disabled</label>
                 </fieldset>
 
                 <!-- Повторите для строк 6-10 аналогично -->
@@ -66,8 +67,8 @@
                 <fieldset>
                     <legend>Favorite restaurants</legend>
                     <p>Makes it possible to add establishments to your favorites list. Recommended for large chains.</p>
-                    <label><input type="radio" name="Favorite restaurants" value="Enabled" checked> Enabled</label>
-                    <label><input type="radio" name="Favorite restaurants" value="Disabled"> Disabled</label>
+                    <label><input type="radio" name="Favorite" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="Favorite" value="Disabled"> Disabled</label>
                 </fieldset>
 
                 <!-- Повторите для остальных строк 7-10 -->
