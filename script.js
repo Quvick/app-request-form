@@ -7,17 +7,16 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < formFields.length; i++) {
             const field = formFields[i];
             if (field.name) {
-                const savedValue = localStorage.getItem(field.name);
-                if (savedValue !== null) {
-                    if (field.type === 'checkbox' || field.type === 'radio') {
+                let key = field.name;
+                if (field.type === 'checkbox' || field.type === 'radio') {
+                    key = `${field.name}-${field.value}`; // Уникальный ключ для каждого элемента
+                    const savedValue = localStorage.getItem(key);
+                    if (savedValue !== null) {
                         field.checked = savedValue === 'true';
-                    } else if (field.options && field.multiple) {
-                        // Для множественного выбора
-                        const values = JSON.parse(savedValue);
-                        for (let j = 0; j < field.options.length; j++) {
-                            field.options[j].selected = values.includes(field.options[j].value);
-                        }
-                    } else {
+                    }
+                } else {
+                    const savedValue = localStorage.getItem(key);
+                    if (savedValue !== null) {
                         field.value = savedValue;
                     }
                 }
@@ -30,14 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < formFields.length; i++) {
             const field = formFields[i];
             if (field.name) {
+                let key = field.name;
                 if (field.type === 'checkbox' || field.type === 'radio') {
-                    localStorage.setItem(field.name, field.checked);
-                } else if (field.options && field.multiple) {
-                    // Для множественного выбора
-                    const selectedOptions = Array.from(field.selectedOptions).map(option => option.value);
-                    localStorage.setItem(field.name, JSON.stringify(selectedOptions));
+                    key = `${field.name}-${field.value}`; // Уникальный ключ для каждого элемента
+                    localStorage.setItem(key, field.checked);
                 } else {
-                    localStorage.setItem(field.name, field.value);
+                    localStorage.setItem(key, field.value);
                 }
             }
         }
@@ -72,7 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 for (let i = 0; i < formFields.length; i++) {
                     const field = formFields[i];
                     if (field.name) {
-                        localStorage.removeItem(field.name);
+                        let key = field.name;
+                        if (field.type === 'checkbox' || field.type === 'radio') {
+                            key = `${field.name}-${field.value}`; // Уникальный ключ для каждого элемента
+                        }
+                        localStorage.removeItem(key);
                     }
                 }
             } else {

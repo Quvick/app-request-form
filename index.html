@@ -41,7 +41,6 @@
                 <h2>App Configuration</h2>
                 <p>Please select the functions that will be included in the application</p>
 
-                <!-- Строка 4: Filters on restaurant list -->
                 <fieldset>
                     <legend>Filters on restaurant list</legend>
                     <p>Recommended only for large chains with restaurants of various types and functionality.</p>
@@ -54,26 +53,48 @@
                     <label><input type="checkbox" name="Filters" value="Sort"> Sort</label>
                 </fieldset>
 
-                <!-- Строка 5: Authorization & User Profiles -->
                 <fieldset>
                     <legend>Authorization & User Profiles</legend>
                     <p>Notification Center is a feature that allows you to send custom messages with push notifications to your customers.</p>
-                    <label><input type="radio" name="Auth" value="Enabled" checked> Enabled</label>
-                    <label><input type="radio" name="Auth" value="Disabled"> Disabled</label>
+                    <label><input type="radio" name="Authorization & User Profiles" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="Authorization & User Profiles" value="Disabled"> Disabled</label>
                 </fieldset>
 
-                <!-- Повторите для строк 6-10 аналогично -->
-                <!-- Пример для строки 6: Favorite restaurants -->
                 <fieldset>
                     <legend>Favorite restaurants</legend>
                     <p>Makes it possible to add establishments to your favorites list. Recommended for large chains.</p>
-                    <label><input type="radio" name="Favorite" value="Enabled" checked> Enabled</label>
-                    <label><input type="radio" name="Favorite" value="Disabled"> Disabled</label>
+                    <label><input type="radio" name="Favorite restaurants" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="Favorite restaurants" value="Disabled"> Disabled</label>
                 </fieldset>
 
-                <!-- Повторите для остальных строк 7-10 -->
+                <fieldset>
+                    <legend>QR scanner</legend>
+                    <p>Recommended for establishments that use QRs on tables</p>
+                    <label><input type="radio" name="QR scanner" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="QR scanner" value="Disabled"> Disabled</label>
+                </fieldset>
 
-                <!-- Строка 11: Default Screen on startup -->
+                <fieldset>
+                    <legend>Search by places</legend>
+                    <p>Recommended for large chains (10+ places)</p>
+                    <label><input type="radio" name="Search by places" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="Search by places" value="Disabled"> Disabled</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Rank</legend>
+                    <p>Makes the establishment's rating visible to users</p>
+                    <label><input type="radio" name="Rank" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="Rank" value="Disabled"> Disabled</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Reviews</legend>
+                    <p>Makes reviews of the establishment visible to users</p>
+                    <label><input type="radio" name="Reviews" value="Enabled" checked> Enabled</label>
+                    <label><input type="radio" name="Reviews" value="Disabled"> Disabled</label>
+                </fieldset>
+
                 <fieldset>
                     <legend>Default Screen on startup</legend>
                     <p>Makes reviews of the establishment visible to users.</p>
