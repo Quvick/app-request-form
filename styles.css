@@ -81,8 +81,39 @@ button[type="submit"]:hover {
     background-color: #d46246;
 }
 
+input[type="text"],
+input[type="url"],
+input[type="checkbox"],
+input[type="radio"],
+button[type="submit"] {
+    touch-action: manipulation;
+}
+
+/* Увеличение размеров элементов на мобильных устройствах */
 @media (max-width: 600px) {
-    .container {
+    input[type="text"],
+    input[type="url"] {
         padding: 15px;
+        font-size: 1em;
+    }
+
+    label span {
+        font-size: 1em;
+    }
+
+    label p {
+        font-size: 0.9em;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2em;
     }
 }
