@@ -17,23 +17,30 @@
             <section>
                 <h2>Base Information</h2>
 
-                <label>
-                    <span>App Name</span>
+                <div class="form-group">
+                    <label for="app-name">
+                        <span>App Name</span>
+                    </label>
                     <p>Shouldn’t contain special characters (emoji, symbols, etc)</p>
-                    <input type="text" name="App Name" required>
-                </label>
-
-                <label>
-                    <span>App Icon</span>
+                    <input type="text" id="app-name" name="App Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="app-icon">
+                        <span>App Icon</span>
+                    </label>
                     <p>Please insert here a link (Google Drive, Dropbox, etc) where we can download the logo of your establishment. Minimal Size: 1024x1024 px. Vector file format is preferred: SVG, EPS or AI</p>
-                    <input type="url" name="App Icon" required>
-                </label>
+                    <input type="url" id="app-icon" name="App Icon" required>
+                </div>
 
-                <label>
-                    <span>Main color of your application</span>
+                <div class="form-group">
+                    <label for="main-color">
+                        <span>Main color of your application</span>
+                    </label>
                     <p>If you want to keep the current color from the template settings, leave this field blank.</p>
-                    <input type="text" name="Main Color" placeholder="#FFFFFF" pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" title="Please enter a valid HEX color code, e.g., #FFFFFF">
-                </label>
+                    <input type="text" id="main-color" name="Main Color" placeholder="#FFFFFF" pattern="^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" title="Please enter a valid HEX color code, e.g., #FFFFFF">
+                </div>
+                
             </section>
 
             <!-- Блок #2: App Configuration -->
