@@ -30,15 +30,16 @@ label {
 }
 
 label span {
-    display: block;
+    display: inline-block;
     font-weight: 600;
-    margin-bottom: 6px;
+    line-height: 24px;
 }
 
 label p {
-    font-size: 15px;
+    font-size: 14px;
     color: #666666;
     margin-bottom: 6px;
+    margin-top: 4px;
 }
 
 input[type="text"],
@@ -59,6 +60,12 @@ fieldset {
     margin-bottom: 24px;
 }
 
+fieldset p {
+    margin: 0px 0px 16px 0px;
+    font-size: 14px;
+    color: #666666;
+}
+
 fieldset label {
     display: inline-block;
     margin-bottom: 4px;
@@ -68,8 +75,11 @@ fieldset label {
 }
 
 legend {
+    position: relative;
     font-weight: 600;
     padding: 0 10px;
+    display: flex;
+    align-items: center;
 }
 
 input[type="checkbox"],
@@ -97,6 +107,134 @@ input[type="checkbox"],
 input[type="radio"],
 button[type="submit"] {
     touch-action: manipulation;
+}
+
+/* Стили для иконки вопроса и всплывающей подсказки */
+.tooltip {
+    position: relative;
+    display: block;
+}
+
+.question-mark {
+    display: inline-block;
+    margin-left: 8px;
+    background-color: #EB7353;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tooltip-content {
+    visibility: hidden;
+    opacity: 0;
+    width: 300px;
+    background-color: #ffffff;
+    color: #000000;
+    text-align: left;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    top: 110%; /* Регулируйте это значение по необходимости */
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    transition: opacity 0.2s;
+}
+
+.tooltip-content p {
+    margin-top: 0;
+}
+
+.tooltip-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+.tooltip:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content button {
+    background-color: #EB7353;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #d46246;
+}
+
+/* Стили для кнопки в состоянии загрузки */
+button[type="submit"].loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+    background-color: #cccccc; /* Цвет деактивированной кнопки */
+}
+
+button[type="submit"].loading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: button-loader 1s linear infinite;
+}
+
+@keyframes button-loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Увеличение размеров элементов на мобильных устройствах */
