@@ -280,6 +280,14 @@ button[type="submit"].loading::after {
     box-shadow: none;
 }
 
+.tooltip-content img {
+    max-width: 100%; /* Картинка не выйдет за пределы ширины контейнера */
+    max-height: 100%; /* Картинка не выйдет за пределы высоты контейнера */
+    object-fit: contain; /* Картинка сохраняет пропорции и вписывается в контейнер */
+    display: block; /* Убираем лишнее пространство вокруг изображения */
+    margin: 0 auto; /* Центрируем картинку */
+}
+
 /* Для десктопной версии */
 @media (min-width: 600px) {
     .tooltip-content {
@@ -293,6 +301,11 @@ button[type="submit"].loading::after {
         border-radius: 6px; /* Скругления углов для десктопа */
         box-shadow: 0px 0px 10px rgba(0,0,0,0.1); /* Тень для десктопа */
     }
+
+    html {
+        overflow-y: scroll;
+    }
+
 }
 
 /* Для мобильной версии */
@@ -355,3 +368,4 @@ button[type="submit"].loading::after {
     }
 
 }
+
