@@ -180,17 +180,28 @@ button[type="submit"].loading::after {
     background-color: #d46246;
 }
 
-/* Стили для иконки вопроса и всплывающей подсказки */
+/* Стили для триггера подсказки */
 .tooltip-trigger {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
 }
 
+/* При наведении на область с заголовком и знаком вопроса */
+.tooltip-trigger:hover .question-mark {
+    background-color: #EB7353; /* Оранжевый фон */
+    color: #ffffff; /* Белый символ вопроса */
+}
+
+.tooltip-trigger:hover .legend-title {
+    color: #EB7353; /* Оранжевый цвет текста заголовка */
+}
+
+/* Стили для иконки вопроса */
 .question-mark {
     margin-left: 8px;
-    background-color: #EB7353;
-    color: #ffffff;
+    background-color: #cccccc; /* Светло-серый фон */
+    color: #000000; /* Чёрный символ вопроса */
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -198,6 +209,13 @@ button[type="submit"].loading::after {
     line-height: 20px;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Стили для заголовка */
+.legend-title {
+    color: inherit; /* Наследуем цвет текста */
+    transition: color 0.2s;
 }
 
 /* Стили для кнопки закрытия */
