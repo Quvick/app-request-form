@@ -4,6 +4,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('thank-you-modal');
     const backToFormButton = document.getElementById('back-to-form');
     const submitButton = document.getElementById('submit-button');
+    const body = document.body;
+
+    // Функция для блокировки прокрутки
+    function disableScroll() {
+        body.style.overflow = 'hidden';
+    }
+
+    // Функция для разблокировки прокрутки
+    function enableScroll() {
+        body.style.overflow = '';
+    }
 
     // Функция для загрузки сохранённых данных из localStorage
     function loadFormData() {
@@ -124,9 +135,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (tooltipContent.style.visibility === 'visible') {
                     tooltipContent.style.visibility = 'hidden';
                     tooltipContent.style.opacity = '0';
+                    enableScroll(); // Разблокируем прокрутку
                 } else {
                     tooltipContent.style.visibility = 'visible';
                     tooltipContent.style.opacity = '1';
+                    disableScroll(); // Блокируем прокрутку
                 }
             });
         } else {
@@ -151,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const tooltipContent = btn.parentElement;
             tooltipContent.style.visibility = 'hidden';
             tooltipContent.style.opacity = '0';
+            enableScroll(); // Разблокируем прокрутку
         });
     });
 });
