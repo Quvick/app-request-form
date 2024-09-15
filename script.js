@@ -146,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const tooltipCloses = document.querySelectorAll('.tooltip-close');
     tooltipCloses.forEach(function (btn) {
         btn.addEventListener('click', function (event) {
+            event.preventDefault(); // Предотвращаем действие по умолчанию
             event.stopPropagation(); // Останавливаем всплытие события
             const tooltipContent = btn.parentElement;
             tooltipContent.style.visibility = 'hidden';
