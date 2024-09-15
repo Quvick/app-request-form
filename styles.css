@@ -78,8 +78,6 @@ legend {
     position: relative;
     font-weight: 600;
     padding: 0 10px;
-    display: flex;
-    align-items: center;
 }
 
 input[type="checkbox"],
@@ -109,59 +107,35 @@ button[type="submit"] {
     touch-action: manipulation;
 }
 
-/* Стили для иконки вопроса и всплывающей подсказки */
-.tooltip {
+/* Стили для кнопки в состоянии загрузки */
+button[type="submit"].loading {
     position: relative;
-    display: block;
+    color: transparent;
+    pointer-events: none;
+    background-color: #cccccc; /* Цвет деактивированной кнопки */
 }
 
-.question-mark {
-    display: inline-block;
-    margin-left: 8px;
-    background-color: #EB7353;
-    color: #ffffff;
-    border-radius: 50%;
+button[type="submit"].loading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
     width: 20px;
     height: 20px;
-    text-align: center;
-    line-height: 20px;
-    cursor: pointer;
-    font-weight: bold;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: button-loader 1s linear infinite;
 }
 
-.tooltip-content {
-    visibility: hidden;
-    opacity: 0;
-    width: 300px;
-    background-color: #ffffff;
-    color: #000000;
-    text-align: left;
-    border: 1px solid #cccccc;
-    border-radius: 6px;
-    padding: 10px;
-    position: absolute;
-    z-index: 1;
-    top: 110%; /* Регулируйте это значение по необходимости */
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    transition: opacity 0.2s;
-}
-
-.tooltip-content p {
-    margin-top: 0;
-}
-
-.tooltip-content img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-top: 10px;
-}
-
-.tooltip:hover .tooltip-content {
-    visibility: visible;
-    opacity: 1;
+@keyframes button-loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Стили для модального окна */
@@ -206,35 +180,83 @@ button[type="submit"] {
     background-color: #d46246;
 }
 
-/* Стили для кнопки в состоянии загрузки */
-button[type="submit"].loading {
-    position: relative;
-    color: transparent;
-    pointer-events: none;
-    background-color: #cccccc; /* Цвет деактивированной кнопки */
+/* Стили для иконки вопроса и всплывающей подсказки */
+.tooltip-trigger {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
 }
 
-button[type="submit"].loading::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
+.question-mark {
+    margin-left: 8px;
+    background-color: #EB7353;
+    color: #ffffff;
+    border-radius: 50%;
     width: 20px;
     height: 20px;
-    margin: -10px 0 0 -10px;
-    border: 2px solid #ffffff;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: button-loader 1s linear infinite;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-@keyframes button-loader {
-    0% {
-        transform: rotate(0deg);
+/* Стили для кнопки закрытия */
+.tooltip-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.tooltip-close img {
+    width: 32px;
+    height: 32px;
+}
+
+/* Общие стили для .tooltip-content */
+.tooltip-content {
+    position: absolute;
+    z-index: 1;
+    background-color: #ffffff;
+    color: #000000;
+    text-align: left;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    transition: opacity 0.2s, visibility 0.2s;
+    visibility: hidden;
+    opacity: 0;
+    width: 300px;
+    max-width: 90vw;
+}
+
+/* Для десктопной версии */
+@media (min-width: 600px) {
+    .tooltip-content {
+        top: 110%;
+        left: 50%;
+        transform: translateX(-50%);
     }
-    100% {
-        transform: rotate(360deg);
+}
+
+/* Для мобильной версии */
+@media (max-width: 599px) {
+    .tooltip-content {
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
     }
+}
+
+/* Отображаем подсказку при наведении на триггер */
+.tooltip-trigger:hover + .tooltip-content {
+    visibility: visible;
+    opacity: 1;
 }
 
 /* Увеличение размеров элементов на мобильных устройствах */

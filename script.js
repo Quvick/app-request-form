@@ -105,4 +105,51 @@ document.addEventListener('DOMContentLoaded', function () {
         submitButton.disabled = false;
         submitButton.classList.remove('loading');
     });
+
+    // Функция для определения мобильного устройства
+    function isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || navigator.userAgent.indexOf('IEMobile') !== -1;
+    }
+
+    const tooltipTriggers = document.querySelectorAll('.tooltip-trigger');
+
+    tooltipTriggers.forEach(function (trigger) {
+        const tooltipContent = trigger.parentElement.querySelector('.tooltip-content');
+
+        if (isMobileDevice()) {
+            // Для мобильных устройств
+            trigger.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Переключаем видимость подсказки
+                if (tooltipContent.style.visibility === 'visible') {
+                    tooltipContent.style.visibility = 'hidden';
+                    tooltipContent.style.opacity = '0';
+                } else {
+                    tooltipContent.style.visibility = 'visible';
+                    tooltipContent.style.opacity = '1';
+                }
+            });
+        } else {
+            // Для десктопных устройств
+            trigger.addEventListener('mouseenter', function () {
+                tooltipContent.style.visibility = 'visible';
+                tooltipContent.style.opacity = '1';
+            });
+            trigger.addEventListener('mouseleave', function () {
+                tooltipContent.style.visibility = 'hidden';
+                tooltipContent.style.opacity = '0';
+            });
+        }
+    });
+
+    // Добавляем обработчики событий для кнопок закрытия в подсказках
+    const tooltipCloses = document.querySelectorAll('.tooltip-close');
+    tooltipCloses.forEach(function (btn) {
+        btn.addEventListener('click', function (event) {
+            event.stopPropagation(); // Останавливаем всплытие события
+            const tooltipContent = btn.parentElement;
+            tooltipContent.style.visibility = 'hidden';
+            tooltipContent.style.opacity = '0';
+        });
+    });
 });
