@@ -127,32 +127,20 @@ document.addEventListener('DOMContentLoaded', function () {
     tooltipTriggers.forEach(function (trigger) {
         const tooltipContent = trigger.parentElement.querySelector('.tooltip-content');
 
-        if (isMobileDevice()) {
-            // Для мобильных устройств
-            trigger.addEventListener('click', function (event) {
-                event.preventDefault();
-                // Переключаем видимость подсказки
-                if (tooltipContent.style.visibility === 'visible') {
-                    tooltipContent.style.visibility = 'hidden';
-                    tooltipContent.style.opacity = '0';
-                    enableScroll(); // Разблокируем прокрутку
-                } else {
-                    tooltipContent.style.visibility = 'visible';
-                    tooltipContent.style.opacity = '1';
-                    disableScroll(); // Блокируем прокрутку
-                }
-            });
-        } else {
-            // Для десктопных устройств
-            trigger.addEventListener('mouseenter', function () {
-                tooltipContent.style.visibility = 'visible';
-                tooltipContent.style.opacity = '1';
-            });
-            trigger.addEventListener('mouseleave', function () {
+        // Удаляем предыдущие обработчики событий и используем только JavaScript для управления видимостью
+        trigger.addEventListener('click', function (event) {
+            event.preventDefault();
+            // Переключаем видимость подсказки
+            if (tooltipContent.style.visibility === 'visible') {
                 tooltipContent.style.visibility = 'hidden';
                 tooltipContent.style.opacity = '0';
-            });
-        }
+                enableScroll(); // Разблокируем прокрутку
+            } else {
+                tooltipContent.style.visibility = 'visible';
+                tooltipContent.style.opacity = '1';
+                disableScroll(); // Блокируем прокрутку
+            }
+        });
     });
 
     // Добавляем обработчики событий для кнопок закрытия в подсказках
