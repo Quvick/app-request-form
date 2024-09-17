@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     const savedValue = localStorage.getItem(key);
                     if (savedValue !== null) {
                         field.value = savedValue;
+
+                        // Если это textarea, вызываем автоизменение высоты
+                        if (field.tagName.toLowerCase() === 'textarea') {
+                            autoResize.call(field);
+                        }
                     }
                 }
             }
@@ -93,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             key = `${field.name}-${field.value}`;
                         }
                         localStorage.removeItem(key);
+
+                        // Если это textarea, сбрасываем высоту
+                        if (field.tagName.toLowerCase() === 'textarea') {
+                            field.style.height = 'auto';
+                        }
                     }
                 }
             } else {
@@ -155,7 +165,19 @@ document.addEventListener('DOMContentLoaded', function () {
             enableScroll(); // Разблокируем прокрутку
         });
     });
+
+    // Автоматическое изменение высоты textarea
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(function (textarea) {
+        textarea.addEventListener('input', autoResize, false);
+
+        // Вызываем функцию один раз при загрузке страницы, чтобы установить правильную высоту, если есть сохраненный текст
+        autoResize.call(textarea);
+    });
+
+    function autoResize() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    }
+
 });
-
-
-

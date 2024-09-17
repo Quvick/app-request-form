@@ -40,7 +40,8 @@ h2 {
 }
 
 .form-group input[type="text"],
-.form-group input[type="url"] {
+.form-group input[type="url"],
+.form-group textarea {
     width: 100%;
     padding: 8px 16px;
     border: 1px solid #cccccc;
@@ -69,7 +70,8 @@ label p {
 }
 
 input[type="text"],
-input[type="url"] {
+input[type="url"],
+textarea {
     width: 100%;
     padding: 8px 16px;
     border: 1px solid #cccccc;
@@ -127,6 +129,7 @@ button[type="submit"]:hover {
 
 input[type="text"],
 input[type="url"],
+textarea,
 input[type="checkbox"],
 input[type="radio"],
 button[type="submit"] {
@@ -305,7 +308,6 @@ button[type="submit"].loading::after {
     html {
         overflow-y: scroll;
     }
-
 }
 
 /* Для мобильной версии */
@@ -338,11 +340,11 @@ button[type="submit"].loading::after {
     }
 }
 
-
 /* Увеличение размеров элементов на мобильных устройствах */
 @media (max-width: 600px) {
     input[type="text"],
-    input[type="url"] {
+    input[type="url"],
+    textarea {
         padding: 15px;
         font-size: 1em;
     }
@@ -366,6 +368,18 @@ button[type="submit"].loading::after {
         padding: 15px;
         font-size: 1.2em;
     }
-
 }
 
+/* Стили для textarea */
+textarea {
+    width: 100%;
+    padding: 8px 16px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 24px;
+    resize: none; /* Отключаем возможность изменения размера вручную */
+    overflow: hidden; /* Скрываем полосу прокрутки */
+    min-height: 56px; /* Устанавливаем минимальную высоту */
+}
