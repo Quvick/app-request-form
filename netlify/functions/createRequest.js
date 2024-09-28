@@ -1,6 +1,6 @@
 // netlify/functions/createRequest.js
 
-require('dotenv').config();
+// require('dotenv').config();
 
 const { Client, fql } = require('fauna');
 
