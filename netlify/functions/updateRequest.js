@@ -1,21 +1,23 @@
-// netlify/functions/createRequest.js
+// netlify/functions/updateRequest.js
 
 require('dotenv').config();
 
 const { Client, fql } = require('fauna');
 
 exports.handler = async (event, context) => {
-    const data = JSON.parse(event.body);
-    const appName = data.appName;
+    const id = event.queryStringParameters.id;
 
-    if (!appName) {
+    if (!id) {
         return {
             statusCode: 400,
-            body: JSON.stringify({ error: 'App Name is required' }),
+            body: JSON.stringify({ error: 'ID is required' }),
         };
     }
 
-    // Инициализируем клиент Fauna с правильной переменной окружения
+    // Получаем данные формы из тела запроса
+    const data = JSON.parse(event.body);
+
+    // Инициализируем клиент FaunaDB
     const client = new Client({
         secret: process.env.FAUNA_SECRET,
         domain: 'db.fauna.com',
@@ -23,18 +25,19 @@ exports.handler = async (event, context) => {
     });
 
     try {
+        // Обновляем документ заявки с новыми данными
         const result = await client.query(
             fql`
-                let newRequest = {
-                    appName: ${appName}
-                }
-                create(Collection("requests"), newRequest)
+                let doc = get(Collection("requests"), ${id})
+                update(doc.ref, {
+                    data: ${data}
+                })
             `
         );
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ id: result.document.id }),
+            body: JSON.stringify({ message: 'Request updated successfully' }),
         };
     } catch (error) {
         console.error('Fauna Error:', error);
@@ -44,4 +47,3 @@ exports.handler = async (event, context) => {
         };
     }
 };
-
