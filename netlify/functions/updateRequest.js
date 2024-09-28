@@ -1,7 +1,5 @@
 // netlify/functions/updateRequest.js
 
-// require('dotenv').config();
-
 const { Client, fql } = require('fauna');
 
 exports.handler = async (event, context) => {
@@ -14,10 +12,18 @@ exports.handler = async (event, context) => {
         };
     }
 
-    // Получаем данные формы из тела запроса
-    const data = JSON.parse(event.body);
+    // Parse the form data from the request body
+    let data;
+    try {
+        data = JSON.parse(event.body);
+    } catch (error) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ error: 'Invalid JSON in request body' }),
+        };
+    }
 
-    // Инициализируем клиент FaunaDB
+    // Initialize FaunaDB client
     const client = new Client({
         secret: process.env.FAUNA_SECRET,
         domain: 'db.fauna.com',
@@ -25,13 +31,10 @@ exports.handler = async (event, context) => {
     });
 
     try {
-        // Обновляем документ заявки с новыми данными
+        // Update the document in the "requests" collection with new data
         const result = await client.query(
             fql`
-                let doc = get(Collection("requests"), ${id})
-                update(doc.ref, {
-                    data: ${data}
-                })
+                Collection("requests").document(${id}).update(${data})
             `
         );
 
@@ -40,7 +43,7 @@ exports.handler = async (event, context) => {
             body: JSON.stringify({ message: 'Request updated successfully' }),
         };
     } catch (error) {
-        console.error('Fauna Error:', error);
+        console.error('FaunaDB Error:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'Internal Server Error' }),

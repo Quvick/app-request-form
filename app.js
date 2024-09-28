@@ -1,21 +1,24 @@
+// app.js
+
 document.addEventListener('DOMContentLoaded', function () {
-    // Получаем ID заявки из URL
+    // Get the request ID from the URL
     const path = window.location.pathname;
     const requestId = path.substring(1);
 
     const form = document.querySelector('form');
 
-    // Получаем данные заявки с сервера
+    // Fetch the request data from the server
     fetch(`/.netlify/functions/getRequest?id=${requestId}`)
         .then(response => response.json())
         .then(data => {
             if (data.appName) {
-                // Предзаполняем поле "App Name"
+                // Pre-fill the "App Name" field
                 document.getElementById('app-name').value = data.appName;
-                // Предзаполняем другие поля, если есть данные
-                // Например:
-                // document.getElementById('main-color').value = data['Main Color'] || '';
-                // Обработка чекбоксов и радиокнопок
+
+                // Display the request status
+                document.getElementById('request-status').textContent = data.status || 'Unknown';
+
+                // Pre-fill other form fields if data exists
                 for (let key in data) {
                     const field = document.querySelector(`[name="${key}"]`);
                     if (field) {
@@ -49,17 +52,17 @@ document.addEventListener('DOMContentLoaded', function () {
             window.location.href = '/';
         });
 
-    // Обработка отправки формы
+    // Handle form submission
     form.addEventListener('submit', function (event) {
-        event.preventDefault(); // Предотвращаем стандартное поведение формы
+        event.preventDefault(); // Prevent default form submission
 
-        // Собираем данные формы
+        // Collect form data
         const formData = new FormData(form);
         const data = {};
 
         formData.forEach((value, key) => {
             if (data[key]) {
-                // Если уже есть значение, преобразуем в массив
+                // If the key already exists, convert it to an array
                 if (Array.isArray(data[key])) {
                     data[key].push(value);
                 } else {
@@ -70,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Отправляем данные на серверную функцию updateRequest
+        // Send the data to the updateRequest serverless function
         fetch(`/.netlify/functions/updateRequest?id=${requestId}`, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -81,9 +84,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(result => {
                 if (result.message) {
-                    // Успешно обновлено
+                    // Successfully updated
                     alert('Your request has been submitted successfully.');
-                    // Здесь вы можете перенаправить пользователя или очистить форму
+                    // Optionally, redirect the user or clear the form
                 } else {
                     alert('There was a problem submitting your request.');
                 }

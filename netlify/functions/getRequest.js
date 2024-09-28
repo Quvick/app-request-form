@@ -1,7 +1,5 @@
 // netlify/functions/getRequest.js
 
-// require('dotenv').config();
-
 const { Client, fql } = require('fauna');
 
 exports.handler = async (event, context) => {
@@ -14,6 +12,7 @@ exports.handler = async (event, context) => {
         };
     }
 
+    // Initialize FaunaDB client
     const client = new Client({
         secret: process.env.FAUNA_SECRET,
         domain: 'db.fauna.com',
@@ -23,17 +22,17 @@ exports.handler = async (event, context) => {
     try {
         const result = await client.query(
             fql`
-                let doc = get(Collection("requests"), ${id})
-                doc.data
+                // Retrieve the document data from the "requests" collection by ID
+                Collection("requests").document(${id}).get()
             `
         );
 
         return {
             statusCode: 200,
-            body: JSON.stringify(result),
+            body: JSON.stringify(result.data),
         };
     } catch (error) {
-        console.error('Fauna Error:', error);
+        console.error('FaunaDB Error:', error);
         return {
             statusCode: 404,
             body: JSON.stringify({ error: 'Not Found' }),

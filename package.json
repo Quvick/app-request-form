@@ -10,6 +10,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "fauna": "^2.2.0"
+    "fauna": "^5.0.0"
   }
 }

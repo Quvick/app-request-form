@@ -1,11 +1,18 @@
 // netlify/functions/createRequest.js
 
-// require('dotenv').config();
-
 const { Client, fql } = require('fauna');
 
 exports.handler = async (event, context) => {
-    const data = JSON.parse(event.body);
+    let data;
+    try {
+        data = JSON.parse(event.body);
+    } catch (error) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ error: 'Invalid JSON in request body' }),
+        };
+    }
+
     const appName = data.appName;
 
     if (!appName) {
@@ -15,7 +22,7 @@ exports.handler = async (event, context) => {
         };
     }
 
-    // Инициализируем клиент Fauna с правильной переменной окружения
+    // Initialize FaunaDB client
     const client = new Client({
         secret: process.env.FAUNA_SECRET,
         domain: 'db.fauna.com',
@@ -25,23 +32,23 @@ exports.handler = async (event, context) => {
     try {
         const result = await client.query(
             fql`
-                let newRequest = {
-                    appName: ${appName}
-                }
-                create(Collection("requests"), newRequest)
+                // Create a new request document in the "requests" collection
+                Collection("requests").create({
+                    appName: ${appName},
+                    status: "New"
+                })
             `
         );
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ id: result.document.id }),
+            body: JSON.stringify({ id: result.id }),
         };
     } catch (error) {
-        console.error('Fauna Error:', error);
+        console.error('FaunaDB Error:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'Internal Server Error' }),
         };
     }
 };
-
